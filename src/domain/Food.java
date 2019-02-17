@@ -4,6 +4,7 @@ public class Food {
 
     private Long id;
     private String name;
+    private Day day;
     private Long calories;
     private Long protein;
     private Long fat;
@@ -31,6 +32,14 @@ public class Food {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Day getDay() {
+        return day;
+    }
+
+    public void setDay(Day day) {
+        this.day = day;
     }
 
     public Long getCalories() {

@@ -1,5 +1,8 @@
 package domain;
 
+import service.day.DayStateEnum;
+import static service.day.DayStateEnum.UNDERFULFILLED;
+
 import java.time.Instant;
 import java.util.List;
 import java.util.ArrayList;
@@ -8,6 +11,7 @@ public class Day {
 
     private Long id;
     private Instant date;
+    private DayStateEnum status = UNDERFULFILLED;
     private User owner;
     private List<Food> food = new ArrayList<>();
 
@@ -28,6 +32,14 @@ public class Day {
 
     public void setDate(Instant date) {
         this.date = date;
+    }
+
+    public DayStateEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(DayStateEnum status) {
+        this.status = status;
     }
 
     public User getOwner() {
