@@ -43,4 +43,10 @@ public class FoodInMemoryRepository implements FoodRepository {
     public Optional<Food> findById(Long id) {
         return foods.stream().filter(food -> food.getId().equals(id)).findAny();
     }
+
+    @Override
+    public void delete(Long id){
+        foods.removeIf(food -> food.getId().equals(id));
+    }
+
 }

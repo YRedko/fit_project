@@ -18,4 +18,6 @@ public interface FoodRepository {
 
     Optional<Food> findById(Long id);
 
+    void delete(Long id);
+
 }
