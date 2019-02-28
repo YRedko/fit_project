@@ -1,5 +1,10 @@
 package service.day;
 
 public enum DayStateEnum {
-    UNDERFULFILLED, DONE, OVERPOWERED
+    UNFINISHED, DONE, EXCEEDED
+    /*
+    * UNFINISHED - недовыполнено   unfinished
+    * DONE - выполнено
+    * EXCEEDED - перевыполнено
+    * */
 }
