@@ -13,9 +13,19 @@ public class Day {
     private Instant date;
     private DayStateEnum status = UNDERFULFILLED;
     private User owner;
+    private Long calories;
     private List<Food> food = new ArrayList<>();
 
     public Day() {
+    }
+
+    public Day(Long id, Instant date, DayStateEnum status, User owner, Long calories, List<Food> food) {
+        this.id = id;
+        this.date = date;
+        this.status = status;
+        this.owner = owner;
+        this.calories = calories;
+        this.food = food;
     }
 
     public Long getId() {
@@ -48,6 +58,14 @@ public class Day {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public Long getCalories() {
+        return calories;
+    }
+
+    public void setCalories(Long calories) {
+        this.calories = calories;
     }
 
     public List<Food> getFood() {
