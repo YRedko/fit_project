@@ -16,8 +16,7 @@ public class Day {
     public Day() {
     }
 
-    public Day(Long id, Instant date, String status, User owner, Long calories, List<Food> food) {
-        this.id = id;
+    public Day(Instant date, String status, User owner, Long calories, List<Food> food) {
         this.date = date;
         this.status = status;
         this.owner = owner;

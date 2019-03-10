@@ -19,15 +19,12 @@ public class FoodService {
         this.dayRepository = dayRepository;
     }
 
-    public Food addFoodToGlobalList(Long id, String name, Long calories, Long protein, Long fat, Long carbs){
+    public Food addFoodToGlobalList(Food food){
+        //Long id, String name, Long calories, Long protein, Long fat, Long carbs
         //Day day = dayRepository.findById(id).orElseThrow(EntityNotFound::new);
-        Food food = new Food(name, calories, protein, fat, carbs);
+        //Food food = new Food(name, calories, protein, fat, carbs);
         return foodRepository.save(food);
     }
-
-//    public Food addFoodToDailyList(Long size){
-//
-//    }
 
     public List<Food> getDayFood(Day day, User user){
         return foodRepository.findByDayAndUser(day, user);

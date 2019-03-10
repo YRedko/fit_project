@@ -10,13 +10,16 @@ public class Food {
     private Long fat;
     private Long carbs;
 
-    public Food(String name, Long calories, Long protein, Long fat, Long carbs) {
+    public Food(long id, String name, Long calories, Long protein, Long fat, Long carbs) {
+        this.id = id;
         this.name = name;
         this.calories = calories;
         this.protein = protein;
         this.fat = fat;
         this.carbs = carbs;
     }
+
+    public Food(){}
 
     public Long getId() {
         return id;
@@ -34,13 +37,9 @@ public class Food {
         this.name = name;
     }
 
-    public Day getDay() {
-        return day;
-    }
+    public Day getDay() { return day; }
 
-    public void setDay(Day day) {
-        this.day = day;
-    }
+    public void setDay(Day day) { this.day = day; }
 
     public Long getCalories() {
         return calories;

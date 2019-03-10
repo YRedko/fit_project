@@ -23,7 +23,8 @@ public class DayService {
         return dayRepository.save(day);
     }
 
-    public Day addFoodToDay(Day day, User user, Food food, Long size){
+    public Day addFoodToDay(Long dayId, User user, Food food, Long size){
+        Day day = getDay(dayId);
         return dayRepository.update(day, food, countCalories(food, size));
     }
 
