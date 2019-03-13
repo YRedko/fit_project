@@ -25,7 +25,7 @@ public class UserInMemoryRepositoryTest {
     public void save() {
         List<User> users = asList(new User("lg1", "p1"), new User("lg1", "p2"));
         users.forEach(repository::save);
-        //assertEquals(users, repository.findAll());
+        assertEquals(users, repository.findAll());
     }
 
     @Test
