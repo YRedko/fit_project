@@ -1,5 +1,10 @@
 package project.domain;
 
+import lombok.ToString;
+
+import java.util.Objects;
+
+@ToString
 public class Food {
 
     private Long id;
@@ -71,5 +76,24 @@ public class Food {
 
     public void setCarbs(Long carbs) {
         this.carbs = carbs;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Food food = (Food) o;
+        return Objects.equals(id, food.id) &&
+                Objects.equals(name, food.name) &&
+                Objects.equals(day, food.day) &&
+                Objects.equals(calories, food.calories) &&
+                Objects.equals(protein, food.protein) &&
+                Objects.equals(fat, food.fat) &&
+                Objects.equals(carbs, food.carbs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, calories, protein, fat, carbs);
     }
 }
