@@ -1,5 +1,6 @@
 package project.service;
 
+import org.springframework.stereotype.Service;
 import project.dao.DayRepository;
 import project.domain.Day;
 import project.domain.Food;
@@ -7,8 +8,10 @@ import project.domain.User;
 import project.exeptions.BussinesException;
 import project.exeptions.EntityNotFound;
 
+import javax.xml.ws.ServiceMode;
 import java.util.List;
 
+@Service
 public class DayService {
 
     private final DayRepository dayRepository;
@@ -30,6 +33,10 @@ public class DayService {
 
     public List<Day> getDaysByFoodAndUser(Food food, User user){
         return this.dayRepository.findDayByFoodAndUser(food, user);
+    }
+
+    public List<Day> getDaysByUser(User user){
+        return this.dayRepository.findDayByUser(user);
     }
 
     private Day getDay(Long id){

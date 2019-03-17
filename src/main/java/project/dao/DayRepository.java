@@ -15,6 +15,8 @@ public interface DayRepository {
 
     List<Day> findDayByFoodAndUser(Food food, User user);
 
+    List<Day> findDayByUser(User user);
+
     Optional<Day> findById(Long id);
 
 }

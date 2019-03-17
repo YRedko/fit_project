@@ -1,5 +1,6 @@
 package project.dao.inmemory;
 
+import org.springframework.stereotype.Repository;
 import project.dao.UserRepository;
 import project.domain.User;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class UserInMemoryRepository implements UserRepository {
 
     private final List<User> users = new ArrayList<>();
@@ -20,6 +22,11 @@ public class UserInMemoryRepository implements UserRepository {
     public User save(User user) {
         users.add(user);
         return user;
+    }
+
+    @Override
+    public List<User> findAll(){
+        return new ArrayList<>(users);
     }
 
     @Override

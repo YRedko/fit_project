@@ -1,5 +1,6 @@
 package project.service;
 
+import org.springframework.stereotype.Service;
 import project.dao.DayRepository;
 import project.dao.FoodRepository;
 import project.domain.Day;
@@ -9,6 +10,7 @@ import project.exeptions.EntityNotFound;
 
 import java.util.List;
 
+@Service
 public class FoodService {
 
     private final FoodRepository foodRepository;

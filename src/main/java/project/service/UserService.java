@@ -3,6 +3,7 @@ package project.service;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
+import org.springframework.stereotype.Service;
 import project.dao.UserRepository;
 import project.domain.User;
 import project.domain.UserDto;
@@ -11,6 +12,7 @@ import project.exeptions.UserAlreadyExsists;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+@Service
 public class UserService {
 
     private final UserRepository userRepository;
