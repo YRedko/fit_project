@@ -28,7 +28,7 @@ public class DayService {
 
     public Day addFoodToDay(Long dayId, User user, Food food, Long size){
         Day day = getDay(dayId);
-        return dayRepository.update(day, food, countCalories(food, size));
+        return dayRepository.update(day, food, day.getCalories() + countCalories(food, size));
     }
 
     public List<Day> getDaysByFoodAndUser(Food food, User user){

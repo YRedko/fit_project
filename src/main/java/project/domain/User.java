@@ -1,5 +1,6 @@
 package project.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 @Getter @Setter
@@ -10,6 +11,8 @@ import lombok.*;
 public class User {
 
     private String login;
+
+    @JsonIgnore
     private String passwordHash;
 
 }

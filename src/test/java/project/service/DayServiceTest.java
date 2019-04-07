@@ -9,6 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import project.dao.DayRepository;
 import project.domain.Day;
 import project.domain.Food;
+import project.domain.FoodConsumption;
 import project.domain.User;
 import project.exeptions.EntityNotFound;
 
@@ -37,7 +38,7 @@ public class DayServiceTest {
     public void createDay() {
         User user = new User("user", "password");
         User wrongUser = new User("wrongUser", "anotherPassword");
-        List<Food> foods = asList(new Food(1L, "Food", 120L, 12L, 5L, 28L));
+        FoodConsumption foods = new FoodConsumption(1L, asList(new Food(1L, "Food", 120L, 12L, 5L, 28L)));
         Day day = new Day(Instant.now(), "Unfinished", wrongUser, 0L, foods);
 
         when(dayRepository.save(day)).thenReturn(day);
@@ -54,7 +55,7 @@ public class DayServiceTest {
     @Test
     public void addFoodToDay() {
         Food food = new Food(1,"1", 1L,1L,1L,1L);
-        List<Food> foods = asList(food);
+        FoodConsumption foods = new FoodConsumption(1L, asList(food));
         User mockUser = new User("login", "password");
         Day mockDay = new Day(Instant.now(), "Unfinished", mockUser, 0L, foods);
 
@@ -82,7 +83,7 @@ public class DayServiceTest {
         Food food1 = new Food(1,"1", 1L,1L,1L,1L);
         food1.setDay(day1);
 
-        List<Food> firstFoodList = asList(food1);
+        FoodConsumption firstFoodList =  new FoodConsumption(1L, asList(food1));
         List<Day> days = asList(new Day(Instant.ofEpochSecond(3600),"1", user1, 1L, firstFoodList),
                 new Day(Instant.ofEpochSecond(7200), "2", user1, 2L, firstFoodList));
 

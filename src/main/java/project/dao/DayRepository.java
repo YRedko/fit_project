@@ -13,6 +13,8 @@ public interface DayRepository {
 
     Day update(Day day, Food food, Long addCalories);
 
+    List<Day> findAll();
+
     List<Day> findDayByFoodAndUser(Food food, User user);
 
     List<Day> findDayByUser(User user);

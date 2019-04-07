@@ -30,18 +30,22 @@ public class DayInMemoryRepository implements DayRepository {
     }
 
     @Override
-    public Day update(Day day, Food food, Long addCalories){
-        day.getEatenFood().add(food);
-        Long calories = day.getCalories() + addCalories;
-        day.setCalories(calories);
+    public Day update(Day day, Food food, Long newCalories){
+        day.getEatenFood().getDailyMealSet().add(food);
+        day.setCalories(newCalories);
         return day;
+    }
+
+    @Override
+    public List<Day> findAll() {
+        return new ArrayList<>(days);
     }
 
     @Override
     public List<Day> findDayByFoodAndUser(Food food, User user) {
         List<Day> list = new ArrayList<>();
         for (Day day : days) {
-            if (day.getEatenFood().equals(food) && day.getOwner().equals(user)) {
+            if (day.getEatenFood().getDailyMealSet().equals(food) && day.getOwner().equals(user)) {
                 list.add(day);
             }
         }

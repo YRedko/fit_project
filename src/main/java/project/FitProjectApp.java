@@ -10,6 +10,8 @@ import project.domain.User;
 import project.domain.UserDto;
 import project.service.DayService;
 
+
+
 @SpringBootApplication
 public class FitProjectApp {
 
