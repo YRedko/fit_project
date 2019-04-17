@@ -1,6 +1,5 @@
 package project.service;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -70,7 +69,7 @@ public class DayServiceTest {
     @Test(expected = EntityNotFound.class)
     public void dayNotFound(){
         when(dayRepository.findById(1L)).thenReturn(Optional.empty());
-        dayService.addFoodToDay(1L, new User(), new Food(), 12L);
+        dayService.addFoodToDay(1L, new User(), new Food(foodDto.getName(), foodDto.getCalories(), foodDto.getProtein(), foodDto.getFat(), foodDto.getCarbs()), 12L);
     }
 
     @Test

@@ -3,14 +3,22 @@ package project.domain;
 public class FoodDto {
 
     private Long id;
-    private Long size;
+    private String name;
+    private Long calories;
+    private Long protein;
+    private Long fat;
+    private Long carbs;
 
     public FoodDto(){
     }
 
-    public FoodDto(Long id, Long size) {
+    public FoodDto(Long id, String name, Long calories, Long protein, Long fat, Long carbs) {
         this.id = id;
-        this.size = size;
+        this.name = name;
+        this.calories = calories;
+        this.protein = protein;
+        this.fat = fat;
+        this.carbs = carbs;
     }
 
     public Long getId() {
@@ -21,11 +29,44 @@ public class FoodDto {
         this.id = id;
     }
 
-    public Long getSize() {
-        return size;
+    public String getName() {
+        return name;
     }
 
-    public void setSize(Long size) {
-        this.size = size;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public Long getCalories() {
+        return calories;
+    }
+
+    public void setCalories(Long calories) {
+        this.calories = calories;
+    }
+
+    public Long getProtein() {
+        return protein;
+    }
+
+    public void setProtein(Long protein) {
+        this.protein = protein;
+    }
+
+    public Long getFat() {
+        return fat;
+    }
+
+    public void setFat(Long fat) {
+        this.fat = fat;
+    }
+
+    public Long getCarbs() {
+        return carbs;
+    }
+
+    public void setCarbs(Long carbs) {
+        this.carbs = carbs;
+    }
+
 }

@@ -28,6 +28,12 @@ public class Food {
         this.carbs = carbs;
     }
 
-    public Food(){}
+    public Food(String name, Long calories, Long protein, Long fat, Long carbs){
+        this.name = name;
+        this.calories = calories;
+        this.protein = protein;
+        this.fat = fat;
+        this.carbs = carbs;
+    }
 
 }

@@ -41,31 +41,31 @@ public class    FoodInMemoryRepositoryTest {
         assertEquals(food, repository.findByName("3"));
     }
 
-    @Test
-    public void findByDayAndUser() {
-        Day day1 = new Day();
-        Day day2 = new Day();
-        Day day3 = new Day();
-        User user1 = new User();
-        User user2 = new User();
-        User user3 = new User();
-
-        day1.setOwner(user1);
-        day2.setOwner(user2);
-        day3.setOwner(user3);
-
-        Food food1 = new Food(1L, "1", 1L, 1L, 1L, 1L );
-        Food food2 = new Food(2L, "2", 2L, 2L, 2L, 2L );
-        Food food3 = new Food(3L, "3", 3L, 3L, 3L, 3L );
-
-        food1.setDay(day1);
-        food2.setDay(day2);
-        food3.setDay(day3);
-        List<Food> foods = asList(food2);
-
-        foods.forEach(repository::save);
-        assertEquals(foods, repository.findByDayAndUser(day2, user2));
-    }
+//    @Test
+//    public void findByDayAndUser() {
+//        Day day1 = new Day();
+//        Day day2 = new Day();
+//        Day day3 = new Day();
+//        User user1 = new User();
+//        User user2 = new User();
+//        User user3 = new User();
+//
+//        day1.setOwner(user1);
+//        day2.setOwner(user2);
+//        day3.setOwner(user3);
+//
+//        Food food1 = new Food(1L, "1", 1L, 1L, 1L, 1L );
+//        Food food2 = new Food(2L, "2", 2L, 2L, 2L, 2L );
+//        Food food3 = new Food(3L, "3", 3L, 3L, 3L, 3L );
+//
+//        food1.setDay(day1);
+//        food2.setDay(day2);
+//        food3.setDay(day3);
+//        List<Food> foods = asList(food2);
+//
+//        foods.forEach(repository::save);
+//        assertEquals(foods, repository.findByDayAndUser(day2, user2));
+//    }
 
     @Test
     public void findById() {

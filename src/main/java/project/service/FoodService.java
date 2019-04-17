@@ -3,22 +3,16 @@ package project.service;
 import org.springframework.stereotype.Service;
 import project.dao.DayRepository;
 import project.dao.FoodRepository;
-import project.domain.Day;
 import project.domain.Food;
-import project.domain.User;
 import project.exeptions.EntityNotFound;
-
-import java.util.List;
 
 @Service
 public class FoodService {
 
     private final FoodRepository foodRepository;
-    private final DayRepository dayRepository;
 
-    public FoodService(FoodRepository foodRepository, DayRepository dayRepository) {
+    public FoodService(FoodRepository foodRepository) {
         this.foodRepository = foodRepository;
-        this.dayRepository = dayRepository;
     }
 
     public Food addFoodToGlobalList(Food food){
@@ -26,10 +20,6 @@ public class FoodService {
         //Day day = dayRepository.findById(id).orElseThrow(EntityNotFound::new);
         //Food food = new Food(name, calories, protein, fat, carbs);
         return foodRepository.save(food);
-    }
-
-    public List<Food> getDayFood(Day day, User user){
-        return foodRepository.findByDayAndUser(day, user);
     }
 
     private Food getFood(Long id){

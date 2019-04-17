@@ -11,7 +11,6 @@ import project.domain.User;
 import project.service.FoodService;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/food")
@@ -26,6 +25,9 @@ public class FoodController {
         Food food = new Food(foodDto.getName(), foodDto.getCalories(), foodDto.getProtein(), foodDto.getFat(), foodDto.getCarbs());
         return foodService.addFoodToGlobalList(food);
     }
+
+    @PostMapping
+    public void delete(Long id){ foodService.delete(id);}
 
     private User getUser(){
         return (User) httpSession.getAttribute("user");

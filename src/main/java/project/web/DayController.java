@@ -33,6 +33,9 @@ public class DayController {
         return dayService.getDaysByUser(getUser());
     }
 
+//    @GetMapping("/own_by_food")
+//    public List<Day> ownDaysByFood() { return dayService.getDaysByFoodAndUser()}
+
     private User getUser(){
         return (User) httpSession.getAttribute("user");
     }

@@ -38,17 +38,6 @@ public class FoodInMemoryRepository implements FoodRepository {
     }
 
     @Override
-    public List<Food> findByDayAndUser(Day day, User user) {
-        List<Food> list = new ArrayList<>();
-        for (Food food : foods) {
-            if (food.getDay().equals(day) && day.getOwner().equals(user)) {
-                list.add(food);
-            }
-        }
-        return list;
-    }
-
-    @Override
     public Optional<Food> findById(Long id) {
         return foods.stream().filter(food -> food.getId().equals(id)).findAny();
     }
