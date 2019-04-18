@@ -8,6 +8,7 @@ import project.domain.User;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
@@ -34,6 +35,11 @@ public class FoodConsumptionInMemoryRepository implements FoodConsumptionReposit
             }
         }
         return list;
+    }
+
+    @Override
+    public Optional<FoodConsumption> findById(Long id) {
+        return foodConsumptions.stream().filter(food -> food.getId().equals(id)).findAny();
     }
 
     @Override

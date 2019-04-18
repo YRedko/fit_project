@@ -6,6 +6,8 @@ import project.dao.FoodRepository;
 import project.domain.Food;
 import project.exeptions.EntityNotFound;
 
+import java.util.List;
+
 @Service
 public class FoodService {
 
@@ -20,6 +22,10 @@ public class FoodService {
         //Day day = dayRepository.findById(id).orElseThrow(EntityNotFound::new);
         //Food food = new Food(name, calories, protein, fat, carbs);
         return foodRepository.save(food);
+    }
+
+    public List<Food> getAllFood(){
+        return foodRepository.findAll();
     }
 
     private Food getFood(Long id){

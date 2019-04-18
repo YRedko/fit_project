@@ -21,9 +21,9 @@ public class FoodConsumptionController {
     private final FoodConsumptionService foodConsumptionService;
     private final HttpSession httpSession;
 
-    @PostMapping
-    public FoodConsumption addToDay(String date, Food food, Long size){
-        return foodConsumptionService.addFoodConsumptionToDay(date,food ,size);
+    @PostMapping("/add")
+    public FoodConsumption addToDay(String date, Long foodId, Long size){
+        return foodConsumptionService.addFoodConsumptionToDay(date, foodId, size);
     }
 
     @GetMapping("/own_by_day")
@@ -31,7 +31,7 @@ public class FoodConsumptionController {
         return foodConsumptionService.getFoodByDateAndUser(date, getUser());
     }
 
-    @PostMapping
+    @PostMapping("/delete")
     public void delete(Long id){ foodConsumptionService.delete(id);}
 
     private User getUser(){

@@ -6,6 +6,6 @@ import java.time.Instant;
 
 @Data
 public class DayDto {
-    private Instant date;
+    private String date;
     private Long calories;
 }

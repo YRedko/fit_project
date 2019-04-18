@@ -13,7 +13,6 @@ public class Food {
 
     private Long id;
     private String name;
-    private Day day;
     private Long calories;
     private Long protein;
     private Long fat;
