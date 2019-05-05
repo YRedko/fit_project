@@ -5,7 +5,7 @@ import project.dao.FoodConsumptionRepository;
 import project.domain.FoodConsumption;
 import project.domain.User;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +26,12 @@ public class FoodConsumptionInMemoryRepository implements FoodConsumptionReposit
     }
 
     @Override
-    public List<FoodConsumption> findByDateAndUser(String date, User user) {
+    public List<FoodConsumption> findAll() {
+        return new ArrayList<>(foodConsumptions);
+    }
+
+    @Override
+    public List<FoodConsumption> findByDateAndUser(LocalDate date, User user) {
         List<FoodConsumption> list = new ArrayList<>();
         for (FoodConsumption foodConsumption : foodConsumptions) {
             if (foodConsumption.getDay().getDate().equals(date) &&

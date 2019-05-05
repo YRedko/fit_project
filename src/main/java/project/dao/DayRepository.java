@@ -5,6 +5,7 @@ import project.domain.Food;
 import project.domain.User;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public interface DayRepository {
 
     List<Day> findDayByUser(User user);
 
-    Optional<Day> findDayByDate(String date);
+    Optional<Day> findDayByDate(LocalDate date);
 
     Optional<Day> findById(Long id);
 
