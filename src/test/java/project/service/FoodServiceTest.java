@@ -40,16 +40,16 @@ public class FoodServiceTest {
         verifyNoMoreInteractions(foodRepository);
     }
 
-    @Test
-    public void getDayFood() {
-        Day day = new Day();
-        day.setId(1L);
-        User user = new User("user login", "password");
-        List<Food> foods = asList(new Food(1,"1", 1L,1L,1L,1L), new Food(2,"2", 2L,2L,2L,2L));
-        when(foodRepository.findByDayAndUser(day, user)).thenReturn(foods);
-        List<Food> dayFood = foodService.getDayFood(day, user);
-        assertEquals(foods, dayFood);
-    }
+//    @Test
+//    public void getDayFood() {
+//        Day day = new Day();
+//        day.setId(1L);
+//        User user = new User("user login", "password");
+//        List<Food> foods = asList(new Food(1,"1", 1L,1L,1L,1L), new Food(2,"2", 2L,2L,2L,2L));
+//        when(foodRepository.findByDayAndUser(day, user)).thenReturn(foods);
+//        List<Food> dayFood = foodService.getDayFood(day, user);
+//        assertEquals(foods, dayFood);
+//    }
 
     @Test
     public void delete() {

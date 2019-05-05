@@ -23,14 +23,14 @@ public class DayController {
     private final HttpSession httpSession;
     private final DayMapper dayMapper;
 
-    @PostMapping
-    public Day create(DayDto day) {
-       return dayService.createDay(dayMapper.toDay(day), getUser());
-    }
-
     @GetMapping("/own")
     public List<Day> ownDays(){
         return dayService.getDaysByUser(getUser());
+    }
+
+    @GetMapping("/all")
+    public List<Day> allDays(){//need for test
+        return dayService.getAllDays();
     }
 
 //    @GetMapping("/own_by_food")

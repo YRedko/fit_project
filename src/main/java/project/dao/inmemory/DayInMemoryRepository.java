@@ -7,9 +7,8 @@ import project.domain.Food;
 import project.domain.FoodConsumption;
 import project.domain.User;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
@@ -27,11 +26,10 @@ public class DayInMemoryRepository implements DayRepository {
     @Override
     public Day save(Day day) {
         if(day.getDate() == null){
-            Date dateNow = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-            day.setDate(dateFormat.format(dateNow));
-            days.add(day);
+            LocalDate localDate = LocalDate.now();
+            day.setDate(localDate);
         }
+        days.add(day);
         return day;
     }
 
@@ -56,9 +54,10 @@ public class DayInMemoryRepository implements DayRepository {
     public List<Day> findDayByFoodAndUser(Food food, User user) {
         List<Day> list = new ArrayList<>();
         for (Day day : days) {
-            for(FoodConsumption meal: day.getEatenFood()) {
-                if (meal.getFood().equals(food) && day.getOwner().equals(user)) {
+            for(FoodConsumption eatenFood: day.getEatenFood()) {
+                if (eatenFood.getFood().equals(food) && day.getOwner().equals(user)) {
                     list.add(day);
+                    break;
                 }
             }
         }
@@ -72,7 +71,7 @@ public class DayInMemoryRepository implements DayRepository {
     }
 
     @Override
-    public Optional<Day> findDayByDate(String date){
+    public Optional<Day> findDayByDate(LocalDate date){
         return days.stream().filter(day -> day.getDate().equals(date)).findFirst();
     }
 

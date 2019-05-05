@@ -11,7 +11,9 @@ import project.domain.User;
 import project.exeptions.BussinesException;
 import project.exeptions.EntityNotFound;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FoodConsumptionService {
@@ -26,14 +28,28 @@ public class FoodConsumptionService {
         this.foodRepository = foodRepository;
     }
 
-    public FoodConsumption addFoodConsumptionToDay(String date, Long foodId, Long size){
-        Day day = dayRepository.findDayByDate(date).orElseThrow(EntityNotFound::new);
+    public FoodConsumption addFoodConsumptionToDay(LocalDate date, Long foodId, Long size, User user){
+        Optional<Day> dayOptional = dayRepository.findDayByDate(date);
+        Day day = new Day();
+        if(dayOptional.isPresent()){
+            day = dayOptional.get();
+        }else {
+            if(date != null){
+                day.setDate(date);
+            }else{
+                day.setDate(LocalDate.now());
+            }
+            day.setOwner(user);
+            dayRepository.save(day);
+        }
         Food food = foodRepository.findById(foodId).orElseThrow(EntityNotFound::new);
         FoodConsumption foodConsumption = new FoodConsumption(food, size, day);
+        //day.getEatenFood().add(foodConsumption);
+        //dayRepository.save()
         return foodConsumptionRepository.save(foodConsumption);
     }
 
-    public List<FoodConsumption> getFoodByDateAndUser(String date, User user){
+    public List<FoodConsumption> getFoodByDateAndUser(LocalDate date, User user){
         return foodConsumptionRepository.findByDateAndUser(date, user);
     }
 
@@ -45,7 +61,7 @@ public class FoodConsumptionService {
         return foodConsumptionRepository.findById(id).orElseThrow(EntityNotFound::new);
     }
 
-    private void assertIsNull(String date, String message) {
+    private void assertIsNull(LocalDate date, String message) {
         if (date != null) {
             throw new BussinesException(message);
         }

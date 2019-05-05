@@ -21,7 +21,6 @@ public class FitProjectApp {
         ApplicationContext context = SpringApplication.run(FitProjectApp.class, args);
         DayService dayService = context.getBean(DayService.class);
         User user = new User("login", "password");
-        dayService.createDay(new Day(), user);
-        System.out.println(dayService.getDaysByUser(user));
+        System.out.println(user);
     }
 }
