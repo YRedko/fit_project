@@ -1,5 +1,6 @@
 package project.dao.inmemory;
 
+import org.springframework.stereotype.Repository;
 import project.dao.FoodRepository;
 import project.domain.Day;
 import project.domain.Food;
@@ -10,6 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static java.util.stream.Collectors.toList;
 
+@Repository
 public class FoodInMemoryRepository implements FoodRepository {
 
     private Set<Food> foods = new HashSet<>();
@@ -33,17 +35,6 @@ public class FoodInMemoryRepository implements FoodRepository {
     @Override
     public List<Food> findByName(String name) {
         return foods.stream().filter(food -> food.getName().equals(name)).collect(toList());
-    }
-
-    @Override
-    public List<Food> findByDayAndUser(Day day, User user) {
-        List<Food> list = new ArrayList<>();
-        for (Food food : foods) {
-            if (food.getDay().equals(day) && day.getOwner().equals(user)) {
-                list.add(food);
-            }
-        }
-        return list;
     }
 
     @Override
