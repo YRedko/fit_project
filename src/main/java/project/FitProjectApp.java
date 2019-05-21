@@ -13,12 +13,11 @@ import project.service.DayService;
 
 
 
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication//(exclude={DataSourceAutoConfiguration.class})
 public class FitProjectApp {
 
     public static void main(String[] args) {
         //ApplicationFactory.userService.registerUser(new UserDto());
-        //System.out.println("Hello World");
         ApplicationContext context = SpringApplication.run(FitProjectApp.class, args);
         DayService dayService = context.getBean(DayService.class);
         User user1 = new User("l", "2");
