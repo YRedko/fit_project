@@ -1,0 +1,42 @@
+databaseChangeLog:
+- changeSet:
+    id: 1
+    author: yredko
+    comment: "Create test entities"
+    changes:
+      - insert:
+          tableName: food
+          columns:
+            - column:
+                name: name
+                value: "bread"
+            - column:
+                name: calories
+                value: "130"
+            - column:
+                name: protein
+                value: "2"
+            - column:
+                name: fat
+                value: "2"
+            - column:
+                name: carbs
+                value: "31"
+      - insert:
+          tableName: food
+          columns:
+            - column:
+                name: name
+                value: "milk"
+            - column:
+                name: calories
+                value: "250"
+            - column:
+                name: protein
+                value: "15"
+            - column:
+                name: fat
+                value: "8"
+            - column:
+                name: carbs
+                value: "10"

@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static java.util.stream.Collectors.toList;
 
-@Repository
+//@Repository
 public class FoodInMemoryRepository implements FoodRepository {
 
     private Set<Food> foods = new HashSet<>();

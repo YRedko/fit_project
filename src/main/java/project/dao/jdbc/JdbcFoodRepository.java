@@ -1,4 +1,3 @@
-/*
 package project.dao.jdbc;
 
 import lombok.RequiredArgsConstructor;
@@ -31,7 +30,7 @@ public class JdbcFoodRepository implements FoodRepository {
                     try(Statement statement = connection.createStatement()){
                         statement.executeUpdate(String.format("INSERT INTO food (name, calories, protein, fat, carbs) " +
                                 "VALUES ('%s', '%s', '%s', '%s', '%s')", food.getName(), food.getCalories(), food.getProtein(),
-                                food.getFat(), food.getCarbs(), Statement.RETURN_GENERATED_KEYS));
+                                food.getFat(), food.getCarbs()), Statement.RETURN_GENERATED_KEYS);
                         if(statement.getGeneratedKeys().next()){
                             food.setId(statement.getGeneratedKeys().getLong("id"));
                         }
@@ -46,8 +45,9 @@ public class JdbcFoodRepository implements FoodRepository {
                         statement.executeUpdate();
                     }
                 }
+                connection.commit();
             } catch (Exception e){
-                log.error("Error safe food", e);
+                log.error("Error safe food: ", e);
                 connection.rollback();
                 throw e;
             }
@@ -64,12 +64,12 @@ public class JdbcFoodRepository implements FoodRepository {
             ResultSet foodResultSet = foodStatement.executeQuery();
             while (foodResultSet.next()){
                 Food food = new Food();
-                food.setId(foodResultSet.getLong("food.id"));
-                food.setName(foodResultSet.getString("food.name"));
-                food.setCalories(foodResultSet.getLong("food.calories"));
-                food.setProtein(foodResultSet.getLong("food.protein"));
-                food.setFat(foodResultSet.getLong("food.fat"));
-                food.setCarbs(foodResultSet.getLong("food.carbs"));
+                food.setId(foodResultSet.getLong("id"));
+                food.setName(foodResultSet.getString("name"));
+                food.setCalories(foodResultSet.getLong("calories"));
+                food.setProtein(foodResultSet.getLong("protein"));
+                food.setFat(foodResultSet.getLong("fat"));
+                food.setCarbs(foodResultSet.getLong("carbs"));
                 foods.add(food);
             }
         }
@@ -124,8 +124,19 @@ public class JdbcFoodRepository implements FoodRepository {
     @Override
     @SneakyThrows
     public void delete(Long id) {
-//        try(Connection connection = connectionManager.createConnection()){
-//        }
+        try(Connection connection = connectionManager.createConnection()){
+            connection.setAutoCommit(false);
+            try{
+                PreparedStatement statement = connection.prepareStatement("DELETE FROM food WHERE id=?");
+                statement.setLong(1, id);
+                statement.executeUpdate();
+                connection.commit();
+            }catch(Exception e){
+                log.error("Error deletion food: ", e);
+                connection.rollback();
+                throw e;
+            }
+        }
     }
 }
-*/
+

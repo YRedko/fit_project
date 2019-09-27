@@ -1,4 +1,3 @@
-/*
 package project.dao.jdbc;
 
 import java.sql.Connection;
@@ -28,4 +27,4 @@ public class ConnectionManager {
                 properties.getPassword());
     }
 
-}*/
+}
