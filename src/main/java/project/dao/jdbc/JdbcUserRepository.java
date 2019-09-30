@@ -35,7 +35,7 @@ public class JdbcUserRepository implements UserRepository {
                     }
                 }
             } catch (Exception e) {
-                log.error("Is user already exist error! {}", e);
+                log.error("Is user already exist error!", e);
                 connection.rollback();
                 throw e;
             }
@@ -50,7 +50,7 @@ public class JdbcUserRepository implements UserRepository {
             connection.setAutoCommit(false);
             try {
                 if (!isUserWithLongExists(user.getLogin())) {
-                    String sql = "INSERT into owner (login, password_hash) values (?, ?)";
+                    String sql = "INSERT INTO owner (login, password_hash) values (?, ?)";
                     try (PreparedStatement statement = connection.prepareStatement(sql)) {
                         statement.setString(1, user.getLogin());
                         statement.setString(2, user.getPasswordHash());

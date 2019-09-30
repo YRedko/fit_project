@@ -27,9 +27,9 @@ public class DayService {
 //        return dayRepository.save(day);
 //    }
 
-    public List<Day> getDaysByFoodAndUser(Food food, User user){
-        return this.dayRepository.findDayByFoodAndUser(food, user);
-    }
+//    public List<Day> getDaysByFoodAndUser(Food food, User user){
+//        return this.dayRepository.findDayByFoodAndUser(food, user);
+//    }
 
     public List<Day> getDaysByUser(User user){
         return this.dayRepository.findDayByUser(user);

@@ -1,17 +1,13 @@
 package project.dao.inmemory;
 
-import org.springframework.stereotype.Repository;
 import project.dao.FoodRepository;
-import project.domain.Day;
 import project.domain.Food;
-import project.domain.User;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static java.util.stream.Collectors.toList;
 
-//@Repository
 public class FoodInMemoryRepository implements FoodRepository {
 
     private Set<Food> foods = new HashSet<>();

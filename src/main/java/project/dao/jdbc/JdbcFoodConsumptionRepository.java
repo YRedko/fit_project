@@ -75,7 +75,28 @@
 //    @Override
 //    @SneakyThrows
 //    public List<FoodConsumption> findByDateAndUser(LocalDate date, User user) {
-//        return null;
+//        List<FoodConsumption> foodConsumptionList = new ArrayList<>();
+//        try(Connection connection = connectionManager.createConnection()){
+//            connection.setAutoCommit(false);
+//            try {
+//                try (PreparedStatement statement = connection.prepareStatement("SELECT * from food_consumption WHERE date=?")) {
+//                    statement.setString(1, login);
+//                    try(ResultSet set = statement.executeQuery()){
+//                        while (set.next()) {
+//                            String userLogin = set.getString("login");
+//                            String passwordHash = set.getString("password_hash");
+//                            user = new User(userLogin, passwordHash);
+//                        }
+//                    }
+//                }
+//                connection.commit();
+//            } catch (Exception e) {
+//                log.error("Error finding food consumption: {}", e);
+//                connection.rollback();
+//                throw e;
+//            }
+//        }
+//        return foodConsumptionList;
 //    }
 //
 //    @Override
