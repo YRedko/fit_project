@@ -7,10 +7,16 @@ databaseChangeLog:
             tableName: owner
             columns:
               - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
                   name: login
                   type: varchar(255)
                   constraints:
-                    primaryKey: true
                     nullable: false
               - column:
                   name: password_hash
@@ -83,8 +89,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: owner_login
-                  type: varchar(255)
+                  name: owner_id
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
@@ -103,10 +109,10 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: day
         - addForeignKeyConstraint:
-            baseColumnNames: owner_login
+            baseColumnNames: owner_id
             baseTableName: day
             constraintName: fk_day_owner
-            referencedColumnNames: login
+            referencedColumnNames: id
             referencedTableName: owner
 
   - include:

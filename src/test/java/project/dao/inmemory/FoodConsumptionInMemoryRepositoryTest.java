@@ -1,3 +1,4 @@
+/*
 package project.dao.inmemory;
 
 import org.junit.Test;
@@ -106,4 +107,4 @@ public class FoodConsumptionInMemoryRepositoryTest {
         repository.delete(2L);
         assertEquals(foodConsumptions, repository.findAll());
     }
-}
+}*/

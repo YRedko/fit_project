@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import project.dao.UserRepository;
 import project.domain.User;
-import project.domain.UserDto;
+import project.domain.dto.UserDto;
 import project.exeptions.UncorrectGrant;
 import project.exeptions.UserAlreadyExsists;
 
@@ -54,15 +54,15 @@ public class UserServiceTest {
     @Test
     public void registerUser() {
         UserDto userDto = new UserDto("login", "passwd");
-        when(userRepository.isUserWithLongExists("login")).thenReturn(false);
+        when(userRepository.existsUserByLogin("login")).thenReturn(false);
         userService.registerUser(userDto);
-        verify(userRepository).isUserWithLongExists("login");
+        verify(userRepository).existsUserByLogin("login");
     }
 
     @Test(expected = UserAlreadyExsists.class)
     public void userAlreadyExists() {
         UserDto userDto = new UserDto("login", "passwd");
-        when(userRepository.isUserWithLongExists("login")).thenReturn(true);
+        when(userRepository.existsUserByLogin("login")).thenReturn(true);
         userService.registerUser(userDto);
     }
 }

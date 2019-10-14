@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
-import project.configuration.ApplicationFactory;
 import project.service.DayService;
 
 
@@ -17,6 +16,5 @@ public class FitProjectApp {
         //ApplicationFactory.userService.registerUser(new UserDto());
         ApplicationContext context = SpringApplication.run(FitProjectApp.class, args);
         DayService dayService = context.getBean(DayService.class);
-        //System.out.println();
     }
 }

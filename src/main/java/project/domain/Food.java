@@ -2,13 +2,18 @@ package project.domain;
 
 import lombok.*;
 
+import javax.persistence.*;
+
 
 @Getter @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @ToString
+@Entity @Table(name = "food")
 public class Food {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Long calories;

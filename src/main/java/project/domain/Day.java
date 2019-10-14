@@ -6,19 +6,25 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Getter @Setter
 @EqualsAndHashCode(of = "id")
-@ToString
+@ToString(exclude = "eatenFood")
+@Entity @Table(name = "day")
 public class Day {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate date;
     //private String status = "Unfinished";
+    @ManyToOne
     private User owner;
     private Long calories = 0L;
+    @OneToMany(mappedBy = "day")
     private List<FoodConsumption> eatenFood;
 
     public Day() {
@@ -36,8 +42,8 @@ public class Day {
         this.eatenFood = food;
     }
 
-    @JsonProperty
-    public String getSmtn() {
-        return "werwerer";
-    }
+//    @JsonProperty
+//    public String getSmtn() {
+//        return "werwerer";
+//    }
 }

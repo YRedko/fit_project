@@ -1,16 +1,17 @@
 package project.web;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 import project.domain.Food;
-import project.domain.FoodDto;
+import project.domain.dto.FoodDto;
 import project.domain.User;
 import project.service.FoodService;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,8 +29,14 @@ public class FoodController {
     }
 
     @GetMapping("/all")
-    public List<Food> getAll(){
-        return foodService.getAllFood();
+    public Page<Food> getAll(int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        return foodService.getAllFood(pageable);
+    }
+
+    @PutMapping("/{id}")
+    public Food update(@PathVariable("id") Long id, @Valid @RequestBody FoodDto foodDto) {
+        return foodService.editFood(id, foodDto);
     }
 
     @PostMapping("/delete")

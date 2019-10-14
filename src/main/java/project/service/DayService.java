@@ -1,5 +1,7 @@
 package project.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import project.dao.DayRepository;
 import project.domain.Day;
@@ -21,22 +23,20 @@ public class DayService {
         this.dayRepository = dayRepository;
     }
 
-//    public Day createDay(Day day, User user){
-//        assertIsNull(day.getDate(),"Id already exists.");
-//        day.setOwner(user);
-//        return dayRepository.save(day);
-//    }
-
 //    public List<Day> getDaysByFoodAndUser(Food food, User user){
 //        return this.dayRepository.findDayByFoodAndUser(food, user);
 //    }
 
     public List<Day> getDaysByUser(User user){
-        return this.dayRepository.findDayByUser(user);
+        return this.dayRepository.findDaysByOwnerId(user.getId());
     }
 
-    public List<Day> getAllDays(){//need fot test
-        return this.dayRepository.findAll();
+    public Page<Day> getAllDays(Pageable pageable){//need fot test
+        return this.dayRepository.findAll(pageable);
+    }
+
+    public Day getDayByDate(LocalDate date){
+        return dayRepository.findDayByDate(date).orElseThrow(EntityNotFound::new);
     }
 
     private Day getDay(Long id){

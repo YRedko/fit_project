@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import project.domain.User;
-import project.domain.UserDto;
+import project.domain.dto.UserDto;
 import project.service.UserService;
 
 import javax.servlet.http.HttpSession;

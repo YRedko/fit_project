@@ -15,6 +15,8 @@ import project.exeptions.EntityNotFound;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,28 +37,30 @@ public class DayServiceTest {
     @Mock
     private DayRepository dayRepository;
 
-//    @Test
-//    public void createDay() {
-//        User user = new User("user", "password");
-//        User wrongUser = new User("wrongUser", "anotherPassword");
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//        LocalDate localDate1 = LocalDate.parse("2019-04-01", formatter);
-//        LocalDate localDate2 = LocalDate.parse("2019-04-02", formatter);
-//        List<FoodConsumption> foods = asList(
-//                new FoodConsumption(1L, new Food(1L, "Food", 120L, 12L, 5L, 28L), 10L, new Day())
-//        );
-//        Day day = new Day(localDate1, wrongUser, foods);
-//
-//        when(dayRepository.save(day)).thenReturn(day);
-//        Day dayResult = dayService.createDay(day, user);
-//
-//        assertNotNull(dayResult);
-//        assertEquals(dayResult.getOwner(), user);
-//
-//        verify(dayRepository).save(refEq(day));
-//
-//        verifyNoMoreInteractions(dayRepository);
-//    }
+    @Test
+    public void getDaysByUser(){
+        User user = new User(1L,"login", "password");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse("2019-10-15", formatter);
+        Day day = new Day(localDate, user);
+
+        List<Day> dayList = Collections.singletonList(day);
+        when(dayRepository.findDaysByOwnerId(1L)).thenReturn(dayList);
+        List<Day> dayListByUser = dayService.getDaysByUser(user);
+        assertEquals(dayList, dayListByUser);
+    }
+
+    @Test
+    public void getDayByDate(){
+        User user = new User(1L,"login", "password");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse("2019-10-15", formatter);
+        Day day = new Day(localDate, user);
+
+        when(dayRepository.findDayByDate(localDate)).thenReturn(Optional.of(day));
+        Day dayByDate = dayService.getDayByDate(localDate);
+        assertEquals(day, dayByDate);
+    }
 
 //    @Test
 //    public void addFoodToDay() {
@@ -83,27 +87,27 @@ public class DayServiceTest {
 //        dayService.addFoodToDay(1L, new User(), new Food(foodDto.getName(), foodDto.getCalories(), foodDto.getProtein(), foodDto.getFat(), foodDto.getCarbs()), 12L);
 //    }
 
-    @Test
-    public void getDaysByFoodAndUser() {
-        User user1 = new User("login 1", "password 1");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localDate1 = LocalDate.parse("2019-04-01", formatter);
-        LocalDate localDate2 = LocalDate.parse("2019-04-02", formatter);
-        Day day1 = new Day(localDate1, user1);
-        Day day2 = new Day(localDate2, user1);
-        day1.setId(1L);
-        day2.setId(2L);
-        Food food1 = new Food(1,"1", 1L,1L,1L,1L);
-
-        List<FoodConsumption> firstFoodList = asList(new FoodConsumption(1L, food1, 17L, day1));
-        day1.setEatenFood(firstFoodList);
-        day2.setEatenFood(firstFoodList);
-
-        List<Day> days = asList( day1, day2 );
-
-        when(dayRepository.findDayByFoodAndUser(food1, user1)).thenReturn(days);
-        List<Day> daysByFoodAndUser = dayService.getDaysByFoodAndUser(food1, user1);
-
-        assertEquals(days, daysByFoodAndUser);
-    }
+//    @Test
+//    public void getDaysByFoodAndUser() {
+//        User user1 = new User("login 1", "password 1");
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        LocalDate localDate1 = LocalDate.parse("2019-04-01", formatter);
+//        LocalDate localDate2 = LocalDate.parse("2019-04-02", formatter);
+//        Day day1 = new Day(localDate1, user1);
+//        Day day2 = new Day(localDate2, user1);
+//        day1.setId(1L);
+//        day2.setId(2L);
+//        Food food1 = new Food(1,"1", 1L,1L,1L,1L);
+//
+//        List<FoodConsumption> firstFoodList = asList(new FoodConsumption(1L, food1, 17L, day1));
+//        day1.setEatenFood(firstFoodList);
+//        day2.setEatenFood(firstFoodList);
+//
+//        List<Day> days = asList( day1, day2 );
+//
+//        when(dayRepository.findDayByFoodAndUser(food1, user1)).thenReturn(days);
+//        List<Day> daysByFoodAndUser = dayService.getDaysByFoodAndUser(food1, user1);
+//
+//        assertEquals(days, daysByFoodAndUser);
+//    }
 }

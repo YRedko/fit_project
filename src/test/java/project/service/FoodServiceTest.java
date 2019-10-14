@@ -10,6 +10,9 @@ import project.dao.FoodRepository;
 import project.domain.Day;
 import project.domain.Food;
 import project.domain.User;
+import project.domain.dto.FoodDto;
+import project.domain.dto.FoodMapper;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +32,8 @@ public class FoodServiceTest {
 
     @Mock
     private FoodRepository foodRepository;
+    @Mock
+    private FoodMapper foodMapper;
 
     @Test
     public void addFoodToGlobalList() {
@@ -40,21 +45,22 @@ public class FoodServiceTest {
         verifyNoMoreInteractions(foodRepository);
     }
 
-//    @Test
-//    public void getDayFood() {
-//        Day day = new Day();
-//        day.setId(1L);
-//        User user = new User("user login", "password");
-//        List<Food> foods = asList(new Food(1,"1", 1L,1L,1L,1L), new Food(2,"2", 2L,2L,2L,2L));
-//        when(foodRepository.findByDayAndUser(day, user)).thenReturn(foods);
-//        List<Food> dayFood = foodService.getDayFood(day, user);
-//        assertEquals(foods, dayFood);
-//    }
+    @Test
+    public void editFood(){
+        Food food = new Food(1L, "Food", 120L, 12L, 5L, 28L);
+        when(foodRepository.findById(1L)).thenReturn(Optional.of(food));
+        foodService.addFoodToGlobalList(food);
+        FoodDto foodDto = new FoodDto( "Food", 220L, 22L, 15L, 128L);
+        when(foodMapper.toFood(foodDto)).thenReturn(new Food(1L, "Food", 220L, 22L, 15L, 128L));
+        foodService.editFood(1L, foodDto);
+        verify(foodRepository).save(refEq(new Food(1L, "Food", 220L, 22L, 15L, 128L)));
+        verifyNoMoreInteractions(foodRepository);
+    }
 
     @Test
     public void delete() {
         foodService.delete(1L);
-        verify(foodRepository).delete(1L);
+        verify(foodRepository).deleteById(1L);
         verifyNoMoreInteractions(foodRepository);
     }
 }

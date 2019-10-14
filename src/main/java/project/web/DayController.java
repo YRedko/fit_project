@@ -1,6 +1,9 @@
 package project.web;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +15,8 @@ import project.domain.dto.DayMapper;
 import project.service.DayService;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -29,8 +34,16 @@ public class DayController {
     }
 
     @GetMapping("/all")
-    public List<Day> allDays(){//need for test
-        return dayService.getAllDays();
+    public Page<Day> allDays(int page, int size){//need for test
+        Pageable pageable = PageRequest.of(page, size);
+        return dayService.getAllDays(pageable);
+    }
+
+    @GetMapping("/own_by_date")
+    public Day dayByDate(String date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        return dayService.getDayByDate(localDate);
     }
 
 //    @GetMapping("/own_by_food")

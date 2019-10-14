@@ -5,14 +5,19 @@ import org.springframework.web.bind.annotation.*;
 import project.domain.Food;
 import project.domain.FoodConsumption;
 import project.domain.User;
+import project.domain.dto.FoodConsumptionDto;
 import project.service.FoodConsumptionService;
 
 import javax.servlet.http.HttpSession;
 import javax.swing.text.DateFormatter;
+import javax.validation.Valid;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -30,12 +35,17 @@ public class FoodConsumptionController {
         return foodConsumptionService.addFoodConsumptionToDay(localDate, foodId, size, getUser());
     }
 
-    @GetMapping("/own_by_day")
-    public List<FoodConsumption> ownByDay(String date){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localDate = LocalDate.parse(date, formatter);
-        return foodConsumptionService.getFoodByDateAndUser(localDate, getUser());
+    @PutMapping("/{id}")
+    public FoodConsumption update(@PathVariable("id") Long id, @Valid @RequestBody FoodConsumptionDto foodConsumptionDto) {
+        return foodConsumptionService.editFoodConsumption(id, foodConsumptionDto);
     }
+
+//    @GetMapping("/own_by_day")
+//    public List<FoodConsumption> ownByDay(String date){
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        LocalDate localDate = LocalDate.parse(date, formatter);
+//        return foodConsumptionService.getFoodByDateAndUser(localDate, getUser());
+//    }
 
     @PostMapping("/delete")
     public void delete(Long id){ foodConsumptionService.delete(id);}

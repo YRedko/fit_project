@@ -1,4 +1,4 @@
-package project.domain;
+package project.domain.dto;
 
 public class UserDto {
 

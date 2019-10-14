@@ -1,3 +1,4 @@
+/*
 package project.dao.inmemory;
 
 import org.junit.Test;
@@ -98,4 +99,4 @@ public class DayInMemoryRepositoryTest {
         days.forEach(repository::save);
         assertEquals(day, repository.findDayByDate(localDate1).get());
     }
-}
+}*/

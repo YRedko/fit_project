@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 import org.springframework.stereotype.Service;
 import project.dao.UserRepository;
 import project.domain.User;
-import project.domain.UserDto;
+import project.domain.dto.UserDto;
 import project.exeptions.UncorrectGrant;
 import project.exeptions.UserAlreadyExsists;
 
@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public User registerUser(UserDto userDto){
-        if(userRepository.isUserWithLongExists(userDto.getLogin())){
+        if(userRepository.existsUserByLogin(userDto.getLogin())){
             throw new UserAlreadyExsists(userDto.getLogin());
         }
         User user = new User();

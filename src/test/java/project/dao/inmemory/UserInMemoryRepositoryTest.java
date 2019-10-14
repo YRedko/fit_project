@@ -1,3 +1,4 @@
+/*
 package project.dao.inmemory;
 
 import org.junit.Test;
@@ -35,4 +36,4 @@ public class UserInMemoryRepositoryTest {
         assertEquals(Optional.of(new User("lg1", "p1")), repository.findUserByLogin("lg1"));
         assertEquals(Optional.empty(), repository.findUserByLogin("lg3"));
     }
-}
+}*/

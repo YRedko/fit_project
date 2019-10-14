@@ -1,9 +1,12 @@
 package project.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import project.dao.DayRepository;
 import project.dao.FoodRepository;
 import project.domain.Food;
+import project.domain.dto.FoodDto;
+import project.domain.dto.FoodMapper;
 import project.exeptions.EntityNotFound;
 
 import java.util.List;
@@ -12,9 +15,11 @@ import java.util.List;
 public class FoodService {
 
     private final FoodRepository foodRepository;
+    private final FoodMapper foodMapper;
 
-    public FoodService(FoodRepository foodRepository) {
+    public FoodService(FoodRepository foodRepository, FoodMapper foodMapper) {
         this.foodRepository = foodRepository;
+        this.foodMapper = foodMapper;
     }
 
     public Food addFoodToGlobalList(Food food){
@@ -24,15 +29,25 @@ public class FoodService {
         return foodRepository.save(food);
     }
 
-    public List<Food> getAllFood(){
-        return foodRepository.findAll();
+    public Page<Food> getAllFood(Pageable pageable){
+        return foodRepository.findAll(pageable);
+    }
+
+    public Food editFood(Long id, FoodDto foodDto){
+        Food food = getFood(id);
+        if(food == null){
+            throw new EntityNotFound();
+        }
+        Food updatedFood = foodMapper.toFood(foodDto);
+        updatedFood.setId(id);
+        return foodRepository.saveAndFlush(updatedFood);
+    }
+
+    public void delete(Long id){
+        foodRepository.deleteById(id);
     }
 
     private Food getFood(Long id){
         return foodRepository.findById(id).orElseThrow(EntityNotFound::new);
-    }
-
-    public void delete(Long id){
-        foodRepository.delete(id);
     }
 }
